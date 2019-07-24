@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const restricted = require('../api/restricted-mdw');
 const checkRole = require('../api/user-role-mdw');
 
-router.get('/', restricted, (req, res) => {
+router.get('/', restricted, checkRole, (req, res) => {
   Users.find(req.decodedToken.roles[0])
     .then(users => {
       res.json(users);
